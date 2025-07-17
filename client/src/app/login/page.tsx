@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { auth, googleProvider } from "@/lib/firebase";
+import { auth, googleProvider } from "../../lib/firebase";
 import {
   signInWithPopup,
   signInWithEmailAndPassword,

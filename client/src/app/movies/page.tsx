@@ -1,37 +1,30 @@
 "use client";
 
-import Navbar from "@/components/Navbar";
+import Navbar from "../../components/Navbar";
 import Image from "next/image";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { moviesService } from "@/services/movies";
+import { moviesService } from "../../services/movies";
 
 // Import Swiper styles
 import "swiper/css";
 import { useEffect, useState } from "react";
-
-import { Movie } from "@/types/movies";
+import { Movie } from "../../types/movies";
 import Link from "next/link";
 
 export default function Home() {
-  const [upcomingReleases, setUpcomingReleases] = useState<Movie[]>([]);
+  const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(true);
-  const highlightedIds = [
-    "tt10919420",
-    "tt1751634",
-    "tt30406366",
-    "tt31216548",
-    "tt27995114",
-  ];
+  const highlightedIds = ["tt31806049", "tt14205554", "tt14961624"];
 
   useEffect(() => {
     moviesService
-      .fetchUpcomingReleases(11, 0)
+      .fetchPopularMovies(11, 0)
       .then((res) => {
-        setUpcomingReleases(res.data || []);
+        setMovies(res.data || []);
       })
       .catch((err) => {
-        console.error("Error fetching show:", err);
+        console.error("Error fetching movies:", err);
       })
       .finally(() => setLoading(false));
   }, []);
@@ -43,30 +36,20 @@ export default function Home() {
 
       {/* Desktop */}
       <main
-        className="hidden md:block min-h-screen bg-cover bg-top bg-no-repeat text-white"
+        className="hidden md:block min-h-screen  bg-cover bg-top bg-no-repeat text-white"
         style={{
           backgroundImage: `url('${
-            upcomingReleases[7].primaryImage ?? "/NoImageAvailable.png"
+            movies[0].primaryImage ?? "/NoImageAvailable.png"
           }')`,
         }}
       >
-        <div className="px-8 pb-16 pt-20 flex flex-col justify-between h-screen">
+        <div className="px-8 pb-16 pt-32 flex flex-col justify-between h-screen">
           <div className="flex flex-col justify-end ">
-            <div className="relative h-8 w-24">
-              <Image
-                src="/NSeriesOriginals.png"
-                alt="NSeriesOriginals"
-                fill
-                sizes="96px" // width: 24 * 4 = 96px
-                className="object-contain"
-              />
-            </div>
-
-            <h1 className="font-bold text-[60px] uppercase text-shadow-xs w-[30%] leading-16">
-              {upcomingReleases[7].primaryTitle}
+            <h1 className="font-bold text-[80px] uppercase text-shadow-xs">
+              {movies[0].primaryTitle}
             </h1>
 
-            <div className="flex flex-col w-[30%] gap-4 mt-5">
+            <div className="flex flex-col w-[30%] gap-4">
               <h1 className="font-semibold flex gap-2 items-center">
                 <span className="relative w-5 h-5">
                   <Image
@@ -77,11 +60,9 @@ export default function Home() {
                     className="object-cover"
                   />
                 </span>
-                <span className="text-shadow-xs">#1 in TV Shows Today</span>
+                <span className="text-shadow-xs">#1 in Movies Today</span>
               </h1>
-              <p className="text-shadow-xs">
-                {upcomingReleases[7].description}
-              </p>
+              <p className="text-shadow-xs">{movies[0].description}</p>
               <div className="flex gap-2">
                 <button className="bg-white h-8 px-4 text-black  font-semibold text-[18px]">
                   ▶ Play
@@ -96,9 +77,11 @@ export default function Home() {
             </div>
           </div>
           <div className="flex flex-col gap-2">
-            <h1 className="text-lg font-semibold px-1">Popular on Netflix</h1>
+            <h1 className="text-lg font-semibold px-1 text-shadow-xs">
+              Popular on Netflix
+            </h1>
             <Swiper className="w-full px-4" spaceBetween={12}>
-              {upcomingReleases.slice(0, 10).map((movie, i) => (
+              {movies.slice(1, 11).map((movie, i) => (
                 <SwiperSlide
                   key={i}
                   className="relative !w-36 !h-48 rounded hover:scale-110"
@@ -124,16 +107,6 @@ export default function Home() {
                       sizes="144px"
                       className="object-fill"
                     />
-
-                    {highlightedIds.includes(movie.id) && (
-                      <Image
-                        src="/NewSeason.png"
-                        alt="New Season"
-                        height={50}
-                        width={80}
-                        className="absolute bottom-2 left-0 z-50"
-                      />
-                    )}
                   </Link>
                 </SwiperSlide>
               ))}
@@ -147,7 +120,7 @@ export default function Home() {
         {/* Top image 60vh */}
         <div className="relative w-full h-[60vh]">
           <Image
-            src={upcomingReleases[7].primaryImage ?? "/NoImageAvailable.png"}
+            src={movies[0].primaryImage ?? "/NoImageAvailable.png"}
             alt="Mobile Background"
             fill
             sizes="100vw"
@@ -180,28 +153,33 @@ export default function Home() {
             <div className="flex flex-col gap-2">
               <h1 className="text-lg font-semibold px-1">Popular on Netflix</h1>
               <Swiper className="w-full px-4" spaceBetween={12}>
-                {upcomingReleases.slice(0, 10).map((movie, i) => (
+                {movies.slice(1, 11).map((movie, i) => (
                   <SwiperSlide
                     key={movie.id}
                     className="relative !w-28 !h-36 rounded hover:scale-110"
                   >
-                    {highlightedIds.includes(movie.id) && (
-                      <div className="absolute top-2 left-3 z-10">
-                        <Image
-                          src="/NetflixIcon.png"
-                          alt="Netflix Icon"
-                          width={10}
-                          height={10}
-                        />
-                      </div>
-                    )}
-                    <Image
-                      src={movie.primaryImage ?? "/NoImageAvailable.png"}
-                      alt={`poster-${i}`}
-                      fill
-                      sizes="112px"
-                      className="object-fill object-center"
-                    />
+                    <Link
+                      href={`/movies/${movie.id}`}
+                      className="block w-full h-full relative"
+                    >
+                      {highlightedIds.includes(movie.id) && (
+                        <div className="absolute top-2 left-3 z-10">
+                          <Image
+                            src="/NetflixIcon.png"
+                            alt="Netflix Icon"
+                            width={10}
+                            height={10}
+                          />
+                        </div>
+                      )}
+                      <Image
+                        src={movie.primaryImage ?? "/NoImageAvailable.png"}
+                        alt={`poster-${i}`}
+                        fill
+                        sizes="112px"
+                        className="object-fill object-center"
+                      />
+                    </Link>
                   </SwiperSlide>
                 ))}
               </Swiper>

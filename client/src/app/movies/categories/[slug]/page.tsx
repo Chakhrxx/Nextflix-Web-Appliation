@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import Navbar from "@/components/Navbar";
+import Navbar from "../../../../components/Navbar";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { moviesService } from "@/services/movies";
-import { Movie } from "@/types/movies";
+import { moviesService } from "../../../../services/movies";
+import { Movie } from "../../../../types/movies";
 import Link from "next/link";
 import "swiper/css";
 

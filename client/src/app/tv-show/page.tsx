@@ -1,16 +1,16 @@
 "use client";
 
-import Navbar from "@/components/Navbar";
+import Navbar from "../../components/Navbar";
 import Image from "next/image";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { moviesService } from "@/services/movies";
+import { moviesService } from "../../services/movies";
 
 // Import Swiper styles
 import "swiper/css";
 import { useEffect, useState } from "react";
 
-import { Movie } from "@/types/movies";
+import { Movie } from "../../types/movies";
 import Link from "next/link";
 
 export default function Home() {

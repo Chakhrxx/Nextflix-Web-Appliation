@@ -3,12 +3,12 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import Navbar from "@/components/Navbar";
+import Navbar from "../components/Navbar";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 
-import { moviesService } from "@/services/movies";
-import { Movie } from "@/types/movies";
+import { moviesService } from "../services/movies";
+import { Movie } from "../types/movies";
 
 export default function Home() {
   const [shows, setShows] = useState<Movie[]>([]);

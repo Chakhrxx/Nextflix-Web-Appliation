@@ -1,0 +1,8 @@
+{
+  "ignoreCommand": "echo 'Skipping Firebase Functions folder'",
+  "build": {
+    "env": {
+      "NEXT_PUBLIC_ENV": "production"
+    }
+  }
+}

@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { moviesService } from "@/services/movies";
-import { Movie } from "@/types/movies";
-import Navbar from "@/components/Navbar";
+import { moviesService } from "../../../services/movies";
+import { Movie } from "../../../types/movies";
+import Navbar from "../../../components/Navbar";
 
 export const dynamic = "force-dynamic";
 
@@ -44,7 +44,7 @@ export default async function MoviePage({
             <Image
               src={movie.primaryImage ?? "/NoImageAvailable.png"}
               alt={movie.primaryTitle}
-               sizes="100vw"
+              sizes="100vw"
               fill
               className="object-contain rounded"
             />
