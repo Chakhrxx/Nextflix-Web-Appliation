@@ -7,24 +7,31 @@ on:
 
 jobs:
   deploy:
+    # ✅ Trigger only when commit message includes '--deploy-vercel'
     if: contains(github.event.head_commit.message, '--deploy-vercel')
     runs-on: ubuntu-latest
 
     steps:
+      # 🔹 Step 1: Checkout the latest source code
       - name: 📥 Checkout code
         uses: actions/checkout@v3
 
+      # 🔹 Step 2: Install project dependencies
       - name: 📦 Install dependencies
+        working-directory: ./client
         run: npm install
 
+      # 🔹 Step 3: Build the Next.js project
       - name: 🔨 Build project
+        working-directory: ./client
         run: npm run build
 
+      # 🔹 Step 4: Deploy to Vercel using Vercel CLI and project tokens
       - name: 🚀 Deploy to Vercel
         run: |
           npx vercel deploy \
-            --prod \
-            --yes \
-            --token ${{ secrets.VERCEL_TOKEN }} \
-            --org-id ${{ secrets.VERCEL_ORG_ID }} \
-            --project-id ${{ secrets.VERCEL_PROJECT_ID }}
+            --prod \                                # Deploy to production
+            --yes \                                 # Skip confirmation prompts
+            --token ${{ secrets.VERCEL_TOKEN }} \   # Auth token from secrets
+            --org-id ${{ secrets.VERCEL_ORG_ID }} \ # Your Vercel organization ID
+            --project-id ${{ secrets.VERCEL_PROJECT_ID }} # Your project ID on Vercel
