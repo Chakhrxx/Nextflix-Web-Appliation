@@ -11,18 +11,20 @@ jobs:
     if: contains(github.event.head_commit.message, '--deploy-func')
 
     steps:
-      - name: Checkout source
+      # 🔹 Step 1: Checkout the latest code from the main branch
+      - name: 🚚 Get Latest Code
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
+      # 🔹 Step 2: Set up Bun runtime environment
+      - name: 🖥️ Set up Bun
+        uses: oven-sh/setup-bun@v1
 
-      - name: Install dependencies
+      # 🔹 Step 3: Install project dependencies using Bun
+      - name: 📦 Install dependencies
         run: bun install
 
-      - name: Build NestJS
+      # 🔹 Step 4: Build the production-ready app
+      - name: 💿 Build the app
         run: bun run build
 
       - name: Deploy to Firebase
