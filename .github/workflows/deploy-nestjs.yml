@@ -2,8 +2,6 @@ name: Deploy to Firebase Functions
 
 on:
   push:
-    paths:
-      - "functions/**"
     branches:
       - main
 
@@ -23,10 +21,12 @@ jobs:
 
       # 🔹 Step 3: Install project dependencies using Bun
       - name: 📦 Install dependencies
+        working-directory: ./functions
         run: bun install
 
       # 🔹 Step 4: Build the production-ready app
       - name: 💿 Build the app
+        working-directory: ./functions
         run: bun run build
 
       - name: Deploy to Firebase
