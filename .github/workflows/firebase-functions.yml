@@ -8,28 +8,31 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
+    # 🔐 Trigger only if commit message includes --deploy-func
     if: contains(github.event.head_commit.message, '--deploy-func')
 
     steps:
-      # 🔹 Step 1: Checkout the latest code from the main branch
-      - name: 🚚 Get Latest Code
+      # ✅ Step 1: Checkout latest commit from repo
+      - name: 🚚 Checkout repository
         uses: actions/checkout@v3
 
-      # 🔹 Step 2: Set up Bun runtime environment
-      - name: 🖥️ Set up Bun
+      # ✅ Step 2: Set up Bun (for Bun-based NestJS)
+      - name: 🔧 Setup Bun
         uses: oven-sh/setup-bun@v1
 
-      # 🔹 Step 3: Install project dependencies using Bun
-      - name: 📦 Install dependencies
+      # ✅ Step 3: Install dependencies
+      - name: 📦 Install dependencies with Bun
         working-directory: ./functions
         run: bun install
 
-      # 🔹 Step 4: Build the production-ready app
-      - name: 💿 Build the app
+      # ✅ Step 4: Build the NestJS project
+      - name: 🏗️ Build NestJS
         working-directory: ./functions
         run: bun run build
 
-      - name: Deploy to Firebase
+      # ✅ Step 5: Deploy to Firebase Functions
+      - name: 🚀 Deploy to Firebase
         uses: w9jds/firebase-action@v13.0.1
         with:
           args: deploy --only functions
