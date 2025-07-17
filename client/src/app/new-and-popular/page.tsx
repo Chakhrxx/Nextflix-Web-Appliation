@@ -1,16 +1,16 @@
 "use client";
 
-import Navbar from "../../components/Navbar";
+import Navbar from "@/components/Navbar";
 import Image from "next/image";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { moviesService } from "../../services/movies";
+import { moviesService } from "@/services/movies";
 
 // Import Swiper styles
 import "swiper/css";
 import { useEffect, useState } from "react";
 
-import { Movie } from "../../types/movies";
+import type { Movie } from "@/types/movies";
 import Link from "next/link";
 
 export default function Home() {
@@ -36,7 +36,13 @@ export default function Home() {
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <p className="text-white">Loading...</p>;
+  if (loading || upcomingReleases.length === 0) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-black">
+        <div className="loader"></div>
+      </div>
+    );
+  }
   return (
     <>
       <Navbar />
@@ -46,7 +52,7 @@ export default function Home() {
         className="hidden md:block min-h-screen bg-cover bg-top bg-no-repeat text-white"
         style={{
           backgroundImage: `url('${
-            upcomingReleases[7].primaryImage ?? "/NoImageAvailable.png"
+            upcomingReleases[7]?.primaryImage ?? "/NoImageAvailable.png"
           }')`,
         }}
       >
@@ -63,7 +69,7 @@ export default function Home() {
             </div>
 
             <h1 className="font-bold text-[60px] uppercase text-shadow-xs w-[30%] leading-16">
-              {upcomingReleases[7].primaryTitle}
+              {upcomingReleases[7]?.primaryTitle}
             </h1>
 
             <div className="flex flex-col w-[30%] gap-4 mt-5">
@@ -80,7 +86,7 @@ export default function Home() {
                 <span className="text-shadow-xs">#1 in TV Shows Today</span>
               </h1>
               <p className="text-shadow-xs">
-                {upcomingReleases[7].description}
+                {upcomingReleases[7]?.description}
               </p>
               <div className="flex gap-2">
                 <button className="bg-white h-8 px-4 text-black  font-semibold text-[18px]">

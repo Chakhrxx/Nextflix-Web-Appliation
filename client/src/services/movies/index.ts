@@ -1,5 +1,5 @@
 // src/services/movies/index.ts
-import api from "../../lib/api";
+import api from "@/lib/api";
 
 export const moviesService = {
   /**

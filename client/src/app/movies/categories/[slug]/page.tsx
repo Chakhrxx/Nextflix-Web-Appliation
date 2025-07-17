@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import Navbar from "../../../../components/Navbar";
+import Navbar from "@/components/Navbar";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { moviesService } from "../../../../services/movies";
-import { Movie } from "../../../../types/movies";
+import { moviesService } from "@/services/movies";
+import { Movie } from "@/types/movies";
 import Link from "next/link";
 import "swiper/css";
 
@@ -40,11 +40,13 @@ export default function CategoriesPage() {
     return (
       <>
         <Navbar />
-        <div className="text-white text-center py-20">Loading...</div>
+        <div className="flex items-center justify-center min-h-screen bg-black">
+          <div className="loader"></div>
+        </div>
       </>
     );
 
-  const featured = movies[0];
+  const featured = movies[2];
   const rest = movies.slice(1, 11);
 
   return (
@@ -62,7 +64,7 @@ export default function CategoriesPage() {
       >
         <div className="px-8 pb-16 pt-32 flex flex-col justify-between h-screen">
           <div className="flex flex-col justify-end">
-            <h1 className="font-bold text-[80px] uppercase text-shadow-xs">
+            <h1 className="font-bold text-[60px] uppercase text-shadow-xs w-[30%] leading-16">
               {featured.primaryTitle}
             </h1>
             <div className="flex flex-col w-[30%] gap-4">
@@ -121,6 +123,7 @@ export default function CategoriesPage() {
                       src={movie.primaryImage ?? "/NoImageAvailable.png"}
                       alt={`poster-${i}`}
                       fill
+                      sizes="144px"
                       className="object-cover"
                     />
                   </Link>
@@ -138,6 +141,7 @@ export default function CategoriesPage() {
             src={featured.primaryImage ?? "/NoImageAvailable.png"}
             alt="Mobile Background"
             fill
+            sizes="100vw"
             className="object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/5 to-transparent z-10" />
@@ -186,6 +190,7 @@ export default function CategoriesPage() {
                       src={movie.primaryImage ?? "/NoImageAvailable.png"}
                       alt={`poster-${i}`}
                       fill
+                      sizes="122px"
                       className="object-cover"
                     />
                   </Link>

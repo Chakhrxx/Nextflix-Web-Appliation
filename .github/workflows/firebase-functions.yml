@@ -13,25 +13,25 @@ jobs:
     if: contains(github.event.head_commit.message, '--deploy-func')
 
     steps:
-      # ✅ Step 1: Checkout latest commit from repo
+      # Step 1: Checkout latest commit from repo
       - name: 🚚 Checkout repository
         uses: actions/checkout@v3
 
-      # ✅ Step 2: Set up Bun (for Bun-based NestJS)
+      # Step 2: Set up Bun (for Bun-based NestJS)
       - name: 🔧 Setup Bun
         uses: oven-sh/setup-bun@v1
 
-      # ✅ Step 3: Install dependencies
+      # Step 3: Install dependencies
       - name: 📦 Install dependencies with Bun
         working-directory: ./functions
         run: bun install
 
-      # ✅ Step 4: Build the NestJS project
+      # Step 4: Build the NestJS project
       - name: 🏗️ Build NestJS
         working-directory: ./functions
         run: bun run build
 
-      # ✅ Step 5: Deploy to Firebase Functions
+      # Step 5: Deploy to Firebase Functions
       - name: 🚀 Deploy to Firebase
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

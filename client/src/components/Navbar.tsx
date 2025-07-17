@@ -1,18 +1,20 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { auth } from "../lib/firebase";
+import { auth } from "@/lib/firebase";
 import { User, onAuthStateChanged, signOut } from "firebase/auth";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { moviesService } from "../services/movies";
+import { moviesService } from "@/services/movies";
 
 const menuItemsDesktop = [
   { label: "Home", href: "/" },
   { label: "TV Shows", href: "/tv-show" },
   { label: "Movies", href: "/movies" },
   { label: "New & Popular", href: "/new-and-popular" },
+  { label: "My List", href: "/movies/categories/adventure" },
+  { label: "Browse by Languages", href: "/movies/categories/action" },
 ];
 
 const menuItemsMobile = [
