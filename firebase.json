@@ -21,10 +21,7 @@
       ".github",
       ".public"
     ],
-    "predeploy": [
-      "cd functions && npm install",
-      "cd functions && npm run build"
-    ]
+    "predeploy": []
   },
   "emulators": {
     "functions": {
