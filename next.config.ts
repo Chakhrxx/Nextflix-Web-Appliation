@@ -1,8 +1,10 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   images: {
     domains: ["image.tmdb.org", "lh3.googleusercontent.com"],
+  },
+  experimental: {
+    appDir: true,
   },
 };
 
