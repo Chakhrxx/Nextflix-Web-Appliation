@@ -56,8 +56,8 @@ export default function Home() {
                     src="/Top10.png"
                     alt="Mobile Background"
                     fill
+                    sizes="20px"
                     className="object-cover"
-                    priority
                   />
                 </span>
                 <span className="text-shadow-xs">#1 in Movies Today</span>
@@ -104,6 +104,7 @@ export default function Home() {
                       src={movie.primaryImage ?? "/NoImageAvailable.png"}
                       alt={`poster-${i}`}
                       fill
+                      sizes="144px"
                       className="object-fill"
                     />
                   </Link>
@@ -122,8 +123,8 @@ export default function Home() {
             src={movies[0].primaryImage ?? "/NoImageAvailable.png"}
             alt="Mobile Background"
             fill
+            sizes="100vw"
             className="object-cover"
-            priority
           />
 
           {/* Gradient overlay */}
@@ -175,6 +176,7 @@ export default function Home() {
                         src={movie.primaryImage ?? "/NoImageAvailable.png"}
                         alt={`poster-${i}`}
                         fill
+                        sizes="112px"
                         className="object-fill object-center"
                       />
                     </Link>

@@ -12,15 +12,11 @@ import "swiper/css";
 
 export const dynamic = "force-dynamic";
 
-const formatSlugToCapital = (text: string) =>
-  text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
-
 export default function CategoriesPage() {
   const { slug } = useParams();
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(true);
   const highlightedIds = ["tt31806049", "tt14205554", "tt14961624"];
-  const formattedGenre = formatSlugToCapital(String(slug));
 
   useEffect(() => {
     if (!slug) return;
@@ -28,7 +24,9 @@ export default function CategoriesPage() {
     moviesService
       .search({
         type: "movie",
-        genre: formattedGenre,
+        genre:
+          String(slug).charAt(0).toUpperCase() +
+          String(slug).slice(1).toLowerCase(),
         rows: 11,
         sortOrder: "ASC",
         sortField: "id",
@@ -74,8 +72,8 @@ export default function CategoriesPage() {
                     src="/Top10.png"
                     alt="Top 10"
                     fill
+                    sizes="20px"
                     className="object-contain"
-                    priority
                   />
                 </span>
                 <span className="text-shadow-xs">#1 in Movies Today</span>
@@ -141,7 +139,6 @@ export default function CategoriesPage() {
             alt="Mobile Background"
             fill
             className="object-cover"
-            priority
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/5 to-transparent z-10" />
         </div>

@@ -45,7 +45,9 @@ export default function Home() {
       <main
         className="hidden md:block min-h-screen bg-cover bg-top bg-no-repeat text-white"
         style={{
-          backgroundImage: `url('${upcomingReleases[7].primaryImage ?? "/NoImageAvailable.png"}')`,
+          backgroundImage: `url('${
+            upcomingReleases[7].primaryImage ?? "/NoImageAvailable.png"
+          }')`,
         }}
       >
         <div className="px-8 pb-16 pt-20 flex flex-col justify-between h-screen">
@@ -55,10 +57,11 @@ export default function Home() {
                 src="/NSeriesOriginals.png"
                 alt="NSeriesOriginals"
                 fill
+                sizes="96px" // width: 24 * 4 = 96px
                 className="object-contain"
-                priority
               />
             </div>
+
             <h1 className="font-bold text-[60px] uppercase text-shadow-xs w-[30%] leading-16">
               {upcomingReleases[7].primaryTitle}
             </h1>
@@ -70,8 +73,8 @@ export default function Home() {
                     src="/Top10.png"
                     alt="Mobile Background"
                     fill
+                    sizes="20px"
                     className="object-cover"
-                    priority
                   />
                 </span>
                 <span className="text-shadow-xs">#1 in TV Shows Today</span>
@@ -118,6 +121,7 @@ export default function Home() {
                       src={movie.primaryImage ?? "/NoImageAvailable.png"}
                       alt={`poster-${i}`}
                       fill
+                      sizes="144px"
                       className="object-fill"
                     />
 
@@ -146,8 +150,8 @@ export default function Home() {
             src={upcomingReleases[7].primaryImage ?? "/NoImageAvailable.png"}
             alt="Mobile Background"
             fill
+            sizes="100vw"
             className="object-cover"
-            priority
           />
 
           {/* Gradient overlay */}
@@ -195,6 +199,7 @@ export default function Home() {
                       src={movie.primaryImage ?? "/NoImageAvailable.png"}
                       alt={`poster-${i}`}
                       fill
+                      sizes="112px"
                       className="object-fill object-center"
                     />
                   </SwiperSlide>

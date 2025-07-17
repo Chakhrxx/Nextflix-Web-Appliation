@@ -57,8 +57,8 @@ export default function Home() {
                 src="/NSeriesOriginals.png"
                 alt="NSeriesOriginals"
                 fill
+                sizes="96px"
                 className="object-contain"
-                priority
               />
             </div>
             <h1 className="font-bold text-[60px] uppercase text-shadow-xs w-[30%] leading-16">
@@ -72,8 +72,8 @@ export default function Home() {
                     src="/Top10.png"
                     alt="Mobile Background"
                     fill
+                    sizes="20px"
                     className="object-cover"
-                    priority
                   />
                 </span>
                 <span className="text-shadow-xs">#1 in TV Shows Today</span>
@@ -118,6 +118,7 @@ export default function Home() {
                       src={movie.primaryImage ?? "/NoImageAvailable.png"}
                       alt={`poster-${i}`}
                       fill
+                      sizes="144px"
                       className="object-fill"
                     />
 
@@ -146,8 +147,8 @@ export default function Home() {
             src={show[0].primaryImage ?? "/NoImageAvailable.png"}
             alt="Mobile Background"
             fill
+            sizes="100vw"
             className="object-cover"
-            priority
           />
 
           {/* Gradient overlay */}
@@ -175,8 +176,8 @@ export default function Home() {
 
             <div className="flex flex-col gap-2">
               <h1 className="text-lg font-semibold px-1">Popular on Netflix</h1>
-              <Swiper className="w-full px-4" spaceBetween={12}>
-                {show.slice(1, 11).map((movie, i) => (
+              <Swiper spaceBetween={12} className="w-full px-4">
+                {show.map((movie, i) => (
                   <SwiperSlide
                     key={movie.id}
                     className="relative !w-28 !h-36 rounded hover:scale-110"
@@ -196,11 +197,21 @@ export default function Home() {
                         </div>
                       )}
                       <Image
-                        src={movie.primaryImage ?? "/NoImageAvailable.png"}
+                        src={movie.primaryImage || "/NoImageAvailable.png"}
                         alt={`poster-${i}`}
                         fill
+                        sizes="112px"
                         className="object-fill object-center"
                       />
+                      {highlightedIds.includes(movie.id) && (
+                        <Image
+                          src="/NewSeason.png"
+                          alt="New Season"
+                          height={50}
+                          width={80}
+                          className="absolute bottom-2 left-0 z-50"
+                        />
+                      )}
                     </Link>
                   </SwiperSlide>
                 ))}
