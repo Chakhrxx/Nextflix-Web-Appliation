@@ -4,6 +4,9 @@ import { moviesService } from "@/services/movies";
 import { Movie } from "@/types/movies";
 import Navbar from "@/components/Navbar";
 
+
+export const dynamic = "force-dynamic";
+
 // Fetch movie detail using service
 async function fetchMovie(slug: string): Promise<Movie | null> {
   try {

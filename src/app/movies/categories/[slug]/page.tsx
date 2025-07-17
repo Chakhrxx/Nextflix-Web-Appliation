@@ -10,6 +10,8 @@ import { Movie } from "@/types/movies";
 import Link from "next/link";
 import "swiper/css";
 
+export const dynamic = "force-dynamic";
+
 const formatSlugToCapital = (text: string) =>
   text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
 
